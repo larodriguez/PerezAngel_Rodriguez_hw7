@@ -101,7 +101,7 @@ int main (int argc, char **argv){
       u_present[k] = u_future[k];
     }
     for(p=0; p<=n_points; p++){
-      fprintf(datos, "%d %f", j, u_present[p]);
+      fprintf(datos, " %f", u_present[p]);
     }
     fprintf(datos, "\n");
   }
