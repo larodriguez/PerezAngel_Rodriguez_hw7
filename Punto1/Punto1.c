@@ -49,10 +49,11 @@ int main (int argc, char **argv){
   }
   float uno; 
   //Condición inicial - cuerda estirada de forma triangular
-  for (i=0;i<=n_points;i++){   
-   
+  for (i=1;i<=n_points-1;i++){   
+    
     if(i<=80){
       u_initial[i] = 0.0125*x[i];
+      i+=10; // esto es lo nuevooo
     }
     else{
       u_initial[i] = (-x[i]/20.0)+5.0;
@@ -64,7 +65,7 @@ int main (int argc, char **argv){
   c = sqrt(T/rho); 
 
   delta_x = L/n_points;
-  delta_t = 0.00158;
+  delta_t = 0.00058;
 
   r = c *(delta_t / delta_x);
   printf("%f \n", r);
