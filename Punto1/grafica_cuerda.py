@@ -13,29 +13,32 @@ data= sys.argv[1]
 #cargar datos del archivo
 datos = np.loadtxt(data)
 
-#definir arreglos para graficar
-t=[]
-u=[]
-x=[]
+#pagina de referencia para hacer la grafica: http://jakevdp.github.io/mpl_tutorial/tutorial_pages/tut5.html
 
-for i in range (1, len(datos)):
-    t.append(datos[:,0])
-    u.append(datos[:,i])
-    x.append([i-1]*100)
-print x, t, u
-#saber cuales fueron las condiciones iniciales
-l=list(datos)
-n=len(l)
-l[n-4:n]=[]
-nombredatos="".join(l)
+#definir arreglos para hacer una amtriz 3d y poder graficar
+t_all = np.ones(121)
+x_all = np.ones(101)
+t_space = np.linspace(0,120,121)
+x_space = np.linspace(0,100,101)
+
+#creamos cada una de las componentes de la grafica y sacamos todos los datos dentro del archivo 'datos' y se lo asignamos a una sola variable
+x = np.outer(t_all, x_space)
+t = np.outer(t_space, x_all)
+u = datos[:]
+
+
+letra=list(data)
+n=len(letra)
+letra[n-4:n]=[]
+nombre_datos="".join(letra)
 
 
 #Gracia 3D de la trayectoria en el plano x, y, z
-#figura = plt.figure()
-#tp = Axes3D(figura)
-#tp.set_xlabel("$X$",fontsize=20)
-#tp.set_ylabel("$Y$",fontsize=20)
-#tp.set_zlabel("$Z$",fontsize=20)
-#tp.set_title("$\mathrm{Trayectoria Particula en 3D}$", fontsize=30)
-#tp.plot(x, y, z)
-#plt.savefig(str(nombredatos)+'_3D_'+'.pdf')
+figura = plt.figure()
+tp = plt.axes(projection='3d')
+tp.set_xlabel("$X$",fontsize=15)
+tp.set_ylabel("$Time$",fontsize=15)
+tp.set_zlabel("$U$",fontsize=15)
+tp.set_title("$\mathrm{Cuerda}$", fontsize=25)
+tp.plot_surface(x, t, u, cmap=plt.cm.jet, rstride=1, cstride=1, linewidth=0)
+plt.savefig(str(nombre_datos)+'_3D_'+'.pdf')
