@@ -15,7 +15,7 @@ datos = np.loadtxt(data)
 
 #pagina de referencia para hacer la grafica: http://jakevdp.github.io/mpl_tutorial/tutorial_pages/tut5.html
 
-#definir arreglos para hacer una amtriz 3d y poder graficar
+#definir arreglos para hacer una matriz 3d y poder graficar
 t_all = np.ones(121)
 x_all = np.ones(101)
 t_space = np.linspace(0,120,121)
@@ -40,5 +40,5 @@ tp.set_xlabel("$X$",fontsize=15)
 tp.set_ylabel("$Time$",fontsize=15)
 tp.set_zlabel("$U$",fontsize=15)
 tp.set_title("$\mathrm{Cuerda}$", fontsize=25)
-tp.plot_surface(x, t, u, cmap=plt.cm.jet, rstride=1, cstride=1, linewidth=0)
+tp.plot_surface(t, x, u, cmap=plt.cm.jet, rstride=1, cstride=1, linewidth=0)
 plt.savefig(str(nombre_datos)+'_3D_'+'.pdf')
