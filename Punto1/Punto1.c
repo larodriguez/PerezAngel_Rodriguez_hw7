@@ -54,7 +54,6 @@ int main (int argc, char **argv){
     
     if(i<=80){
       u_initial[i] = 0.0125*x[i];
-      //i+=10; esto es lo nuevooo
     }
     else{
       u_initial[i] = (-x[i]/20.0)+5.0;
@@ -66,10 +65,10 @@ int main (int argc, char **argv){
   c = sqrt(T/rho); 
 
   delta_x = x[1]-x[0];
-  delta_t = 0.0145;
+  delta_t = 0.0150;
 
   r = c*(delta_t / delta_x);
-  printf("%f \n", r);
+ 
 
   //Condiciones de frontera
   u_initial[0] = 0.0;
@@ -92,9 +91,6 @@ int main (int argc, char **argv){
   for(i=0; i<=n_points; i++){
     u_present[i] = u_future[i];
   }
-
- 
- 
 
   
   //Segunda iteración

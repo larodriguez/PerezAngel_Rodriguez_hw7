@@ -16,33 +16,17 @@ datos = np.loadtxt(data)
 #pagina de referencia para hacer la grafica: http://jakevdp.github.io/mpl_tutorial/tutorial_pages/tut5.html
 
 
-x = np.zeros(shape=(121,101))
-t= np.zeros(shape=(121,101))
-
-contador=0
-contador1=0
-
-
-for i in range (0,101):
-    for j in range(0,121):
-        x[j][i]=contador
-    contador+=1
-for i in range (0,121):
-    for j in range(0,101):
-        t[i][j]=contador1
-    contador1+=1
-
-
 #definir arreglos para hacer una matriz 3d y poder graficar
-#t_all = np.ones(121)
-#x_all = np.ones(101)
-#t_space = np.linspace(0,120,121)
-#x_space = np.linspace(0,100,101)
+t_all = np.ones(121)
+x_all = np.ones(101)
+t_space = np.linspace(0,120,121)
+x_space = np.linspace(0,100,101)
 
 #creamos cada una de las componentes de la grafica y sacamos todos los datos dentro del archivo 'datos' y se lo asignamos a una sola variable
-#x = np.outer(t_all, x_space)
-#t = np.outer(t_space, x_all)
+x = np.outer(x_space, t_all)
+t = np.outer(x_all, t_space)
 u = datos[:]
+u_t = u.transpose()
 
 
 letra=list(data)
@@ -58,5 +42,5 @@ tp.set_xlabel("$Time (s)$",fontsize=15)
 tp.set_ylabel("$X (cm)$",fontsize=15)
 tp.set_zlabel("$U$",fontsize=15)
 tp.set_title("$\mathrm{Cuerda}$", fontsize=25)
-tp.plot_surface(t, x, u, cmap=plt.cm.jet, rstride=1, cstride=1, linewidth=0)
-plt.savefig(str(nombre_datos)+'_3D_'+'.pdf')
+tp.plot_surface(t, x, u_t, cmap=plt.cm.jet, rstride=1, cstride=1, linewidth=0)
+plt.savefig(str(nombre_datos)+'_3D'+'.pdf')
