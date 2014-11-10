@@ -1,21 +1,21 @@
- 0 nan 0.000000 
- 50 nan 1.000000 
- 100 nan 1.000000 
- 150 nan 1.000000 
- 200 nan 1.000000 
- 250 nan 1.000000 
- 300 nan 1.000000 
- 350 nan 1.000000 
- 400 nan 1.000000 
- 450 nan 1.000000 
- 500 nan -44999.000000 
- 550 nan 0.125000 
- 600 nan 0.125000 
- 650 nan 0.125000 
- 700 nan 0.125000 
- 750 nan 0.125000 
- 800 nan 0.125000 
- 850 nan 0.125000 
- 900 nan 0.125000 
- 950 nan 0.125000 
- 1000 nan 0.000000 
+ 0 0.000000 100000.000000 1.000000 
+ 50 nan nan nan 
+ 100 nan nan nan 
+ 150 nan nan nan 
+ 200 nan nan nan 
+ 250 nan nan nan 
+ 300 nan nan nan 
+ 350 nan nan nan 
+ 400 nan nan nan 
+ 450 nan nan nan 
+ 500 nan nan nan 
+ 550 nan nan nan 
+ 600 nan nan nan 
+ 650 nan nan nan 
+ 700 nan nan nan 
+ 750 nan nan nan 
+ 800 nan nan nan 
+ 850 nan nan nan 
+ 900 nan nan nan 
+ 950 nan nan nan 
+ 1000 0.000000 10000.000000 0.125000 

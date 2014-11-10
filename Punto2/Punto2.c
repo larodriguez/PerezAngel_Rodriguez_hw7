@@ -92,8 +92,11 @@ int main (int argc, char **argv){
   }
 
   
-  for (g=0; g<=t; g++){
+  float t_nuevo = t*50;
+  
+  for (g=0; g<=t_nuevo; g++){
     for (j=2; j<=(n_points-2); j++){
+
       u1_presente[j+1] = ((1/2)*(u1[j+2] + u1[j]) - ((delta_t/(2*delta_x))*(f1[j+2] - f1[j])));
       u2_presente[j+1] = ((1/2)*(u2[j+2] + u2[j]) - ((delta_t/(2*delta_x))*(f2[j+2] - f2[j])));
       u3_presente[j+1] = ((1/2)*(u3[j+2] + u3[j]) - ((delta_t/(2*delta_x))*(f3[j+2] - f3[j])));
@@ -101,8 +104,8 @@ int main (int argc, char **argv){
       f1_presente[j+1] = u2_presente[j+1];
       f2_presente[j+1] = (((pow(u2_presente[j+1],2))/u1_presente[j+1]) + ((gamma-1)*(u3_presente[j+1] - ((1/2)*((pow(u2_presente[j+1],2))/u1_presente[j+1])))));
       f3_presente[j+1] = ((u3_presente[j+1] + ((gamma-1)*(u3_presente[j+1] - ((1/2)*((pow(u2_presente[j+1],2))/u1_presente[j+1])))))*(u2_presente[j+1]/u1_presente[j+1]));
-
-
+      
+     
       u1_presente[j-1] = ((1/2)*(u1[j-2] + u1[j]) - ((delta_t/(2*delta_x))*(f1[j-2] - f1[j])));
       u2_presente[j-1] = ((1/2)*(u2[j-2] + u2[j]) - ((delta_t/(2*delta_x))*(f2[j-2] - f2[j])));
       u3_presente[j-1] = ((1/2)*(u3[j-2] + u3[j]) - ((delta_t/(2*delta_x))*(f3[j-2] - f3[j])));
@@ -115,20 +118,25 @@ int main (int argc, char **argv){
       u1_futuro[j] = (u1[j] - ((delta_t/delta_x)*(f1_presente[j+1] - f1_presente[j-1])));
       u2_futuro[j] = (u2[j] - ((delta_t/delta_x)*(f2_presente[j+1] - f2_presente[j-1])));
       u3_futuro[j] = (u2[j] - ((delta_t/delta_x)*(f3_presente[j+1] - f3_presente[j-1])));
-    } 
-    for(j=0; j<=n_points; j++){
+
       u1[j] =  u1_futuro[j];
       u2[j] =  u2_futuro[j];
       u3[j] =  u3_futuro[j];
-    }
+    } 
+    
   }
+
+  
+  float velo;
+  float pre;
 
   for(i=0; i<=n_points; i+=50){
-    fprintf(data, " %d %f %f \n", i, (u2[i]/u1[i]) ,u1[i]); // FALTA LA PRESION
+    
+    velo = u2[i]/u1[i];
+    pre = (gamma-1)*(u3[i] - ((1/2)*((pow(u2[i],2))/u1[i])));
+    
+    fprintf(data, " %d %f %f %f \n", i, velo, pre, u1[i]);   
   }
-  
-  
-
 
   fclose(data);
   return 0; 
