@@ -17,16 +17,16 @@ d = datos[:,3]
 
 
 #saber cuales fueron las condiciones iniciales
-l=list(datos)
+l=list(data)
 n=len(l)
 l[n-4:n]=[]
-nombredatos="".join(l)
+nombre_datos="".join(l)
 
 
 #Graficar
 
 
-plt.figure()
+figura = plt.figure()
 plt.subplot(131, aspect='equal')
 plt.plot(x,v)
 plt.xlabel('Distancia')
@@ -43,4 +43,5 @@ plt.xlabel('Distancia')
 plt.ylabel('Densidad')
 plt.title('Estado Densidad')
 plt.show()
-plt.savefig(str(datos)+'.pdf')
+
+plt.savefig(str(nombre_datos)+'.pdf')

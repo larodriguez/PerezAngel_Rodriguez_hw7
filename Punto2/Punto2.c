@@ -5,6 +5,7 @@
 #define gamma 1.4
 #define n_points 1000.0
 float etotal (float p, float rho, float u);
+float presion (float* u1, float* u2, float* u3, int i);
 
 int main (int argc, char **argv){
 
@@ -36,7 +37,7 @@ int main (int argc, char **argv){
   int j;
   float g;
   float delta_x = 20.0/n_points; 
-  float delta_t = delta_x;
+  float delta_t = t/delta_x;
 
 
   //Se debe entrar un solo valor por parametro
@@ -94,7 +95,7 @@ int main (int argc, char **argv){
   
   float t_nuevo = t*50;
   
-  for (g=0; g<=t_nuevo; g++){
+  for (g=0; g<=n_points; g++){
     for (j=2; j<=(n_points-2); j++){
 
       u1_presente[j+1] = ((1/2)*(u1[j+2] + u1[j]) - ((delta_t/(2*delta_x))*(f1[j+2] - f1[j])));
@@ -102,8 +103,8 @@ int main (int argc, char **argv){
       u3_presente[j+1] = ((1/2)*(u3[j+2] + u3[j]) - ((delta_t/(2*delta_x))*(f3[j+2] - f3[j])));
 
       f1_presente[j+1] = u2_presente[j+1];
-      f2_presente[j+1] = (((pow(u2_presente[j+1],2))/u1_presente[j+1]) + ((gamma-1)*(u3_presente[j+1] - ((1/2)*((pow(u2_presente[j+1],2))/u1_presente[j+1])))));
-      f3_presente[j+1] = ((u3_presente[j+1] + ((gamma-1)*(u3_presente[j+1] - ((1/2)*((pow(u2_presente[j+1],2))/u1_presente[j+1])))))*(u2_presente[j+1]/u1_presente[j+1]));
+      f2_presente[j+1] = (((pow(u2_presente[j+1],2))/u1_presente[j+1]) + (presion(u1_presente, u2_presente, u3_presente, j+1)));
+      f3_presente[j+1] = ((u3_presente[j+1] + (presion(u1_presente, u2_presente, u3_presente, j+1)))*(u2_presente[j+1]/u1_presente[j+1]));
       
      
       u1_presente[j-1] = ((1/2)*(u1[j-2] + u1[j]) - ((delta_t/(2*delta_x))*(f1[j-2] - f1[j])));
@@ -150,4 +151,12 @@ float etotal (float p, float rho, float u){
   etotal = e + ((1/2)*pow(u,2));
 
   return etotal; 
+}
+
+float presion (float* u1, float* u2, float* u3, int i){
+  float presion; 
+  presion = (gamma-1)*(u3[i] - ((1/2)*((pow(u2[i],2))/u1[i])));
+
+  return presion;
+
 }
