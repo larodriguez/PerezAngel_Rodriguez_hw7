@@ -34,6 +34,7 @@ int main (int argc, char **argv){
   float* u3_futuro;
   int i;
   int j;
+  float g;
   float delta_x = 20.0/n_points; 
   float delta_t = delta_x;
 
@@ -91,7 +92,7 @@ int main (int argc, char **argv){
   }
 
   
-  for (i=0; i<=t; i+(delta_t)){
+  for (g=0; g<=t; g++){
     for (j=2; j<=(n_points-2); j++){
       u1_presente[j+1] = ((1/2)*(u1[j+2] + u1[j]) - ((delta_t/(2*delta_x))*(f1[j+2] - f1[j])));
       u2_presente[j+1] = ((1/2)*(u2[j+2] + u2[j]) - ((delta_t/(2*delta_x))*(f2[j+2] - f2[j])));
@@ -122,8 +123,8 @@ int main (int argc, char **argv){
     }
   }
 
-  for(i=0; i<=n_points; j++){
-    fprintf(data, " %d %f %f \n", i, (u2_futuro[i]/u1_futuro[i]) ,u1_futuro[i]); // FALTA LA PRESION
+  for(i=0; i<=n_points; i+=50){
+    fprintf(data, " %d %f %f \n", i, (u2[i]/u1[i]) ,u1[i]); // FALTA LA PRESION
   }
   
   
