@@ -1,3 +1,4 @@
+#si se quiere cambiar el tiempo hay que modificar el 0.1 en la 8 linea y los nombres de los archivos
 all: sod_test.x estado_0.100000.dat estado_0.100000.pdf
 
 sod_test.x: Punto2.c
