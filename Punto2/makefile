@@ -1,4 +1,4 @@
-all: sod_test.x estado_0.100000.dat estado_0.010000.pdf
+all: sod_test.x estado_0.100000.dat estado_0.100000.pdf
 
 sod_test.x: Punto2.c
 	cc Punto2.c -lm -o sod_test.x
