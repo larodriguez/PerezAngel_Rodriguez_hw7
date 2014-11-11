@@ -3,7 +3,7 @@
 #include<math.h>
 #include<stdlib.h>
 #define gamma 1.4
-#define n_points 2000.0
+#define n_points 1000
 float etotal (float p, float rho, float u);
 float presion (float* u1, float* u2, float* u3, int i);
 
@@ -37,7 +37,7 @@ int main (int argc, char **argv){
   int j;
   float g;
   float delta_x = 20.0/n_points; 
-  float delta_t = 1E-4;//t/delta_x;
+  float delta_t = t/(delta_x*1000);
 
 
   //Se debe entrar un solo valor por parametro
@@ -47,7 +47,7 @@ int main (int argc, char **argv){
   } 
   
   t  = atof(argv[1]);
-  float t_points = t/delta_t;
+  int t_points = t/delta_t;
 
   // creando la memoria de los punteros
   U = malloc(3*sizeof(float));

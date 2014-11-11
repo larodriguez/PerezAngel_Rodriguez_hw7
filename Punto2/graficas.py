@@ -15,7 +15,10 @@ v = datos[:,1]
 p = datos[:,2]
 d = datos[:,3]
 
-
+      
+   
+  
+        
 #saber cuales fueron las condiciones iniciales
 l=list(data)
 n=len(l)
@@ -25,23 +28,19 @@ nombre_datos="".join(l)
 
 #Graficar
 
-
-figura = plt.figure()
-plt.subplot(131, aspect='equal')
+a1 = plt.subplot(3,1,1)
 plt.plot(x,v)
 plt.xlabel('Distancia')
 plt.ylabel('Velocidad')
-plt.title('Estado viscosidad')
-plt.subplot(132, aspect='equal')
+
+plt.subplot(3,1,2, sharex=a1)
 plt.plot(x,p)
 plt.xlabel('Distancia')
 plt.ylabel('Presion')
-plt.title('Estado Presion')
-plt.subplot(133, aspect='equal')
+
+plt.subplot(3,1,3, sharex=a1)
 plt.plot(x,d)
 plt.xlabel('Distancia')
 plt.ylabel('Densidad')
-plt.title('Estado Densidad')
-plt.show()
 
 plt.savefig(str(nombre_datos)+'.pdf')
