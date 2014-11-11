@@ -3,7 +3,7 @@
 #include<math.h>
 #include<stdlib.h>
 #define gamma 1.4
-#define n_points 1000.0
+#define n_points 2000.0
 float etotal (float p, float rho, float u);
 float presion (float* u1, float* u2, float* u3, int i);
 
@@ -37,7 +37,7 @@ int main (int argc, char **argv){
   int j;
   float g;
   float delta_x = 20.0/n_points; 
-  float delta_t = t/delta_x;
+  float delta_t = 1E-4;//t/delta_x;
 
 
   //Se debe entrar un solo valor por parametro
@@ -47,6 +47,7 @@ int main (int argc, char **argv){
   } 
   
   t  = atof(argv[1]);
+  float t_points = t/delta_t;
 
   // creando la memoria de los punteros
   U = malloc(3*sizeof(float));
@@ -95,7 +96,13 @@ int main (int argc, char **argv){
   
   float t_nuevo = t*50;
   
-  for (g=0; g<=n_points; g++){
+  for (g=0; g<=t_points; g++){
+
+    for(i=0; i<n_points; i++){
+      u1[i] =  u1_futuro[i];
+      u2[i] =  u2_futuro[i];
+      u3[i] =  u3_futuro[i];
+    }
     for (j=2; j<=(n_points-2); j++){
 
       u1_presente[j+1] = ((1/2)*(u1[j+2] + u1[j]) - ((delta_t/(2*delta_x))*(f1[j+2] - f1[j])));
@@ -112,17 +119,15 @@ int main (int argc, char **argv){
       u3_presente[j-1] = ((1/2)*(u3[j-2] + u3[j]) - ((delta_t/(2*delta_x))*(f3[j-2] - f3[j])));
 
       f1_presente[j-1] = u2_presente[j-1];
-      f2_presente[j-1] = (((pow(u2_presente[j-1],2))/u1_presente[j-1]) + ((gamma-1)*(u3_presente[j-1] - ((1/2)*((pow(u2_presente[j-1],2))/u1_presente[j-1])))));
-      f3_presente[j-1] = ((u3_presente[j-1] + ((gamma-1)*(u3_presente[j-1] - ((1/2)*((pow(u2_presente[j-1],2))/u1_presente[j-1])))))*(u2_presente[j-1]/u1_presente[j-1]));
+      f2_presente[j-1] = (((pow(u2_presente[j-1],2))/u1_presente[j-1]) + ( (presion(u1_presente, u2_presente, u3_presente, j-1))));
+      f3_presente[j-1] = ((u3_presente[j-1] + (presion(u1_presente, u2_presente, u3_presente, j-1))*(u2_presente[j-1]/u1_presente[j-1])));
 
 
       u1_futuro[j] = (u1[j] - ((delta_t/delta_x)*(f1_presente[j+1] - f1_presente[j-1])));
       u2_futuro[j] = (u2[j] - ((delta_t/delta_x)*(f2_presente[j+1] - f2_presente[j-1])));
       u3_futuro[j] = (u2[j] - ((delta_t/delta_x)*(f3_presente[j+1] - f3_presente[j-1])));
 
-      u1[j] =  u1_futuro[j];
-      u2[j] =  u2_futuro[j];
-      u3[j] =  u3_futuro[j];
+     
     } 
     
   }
